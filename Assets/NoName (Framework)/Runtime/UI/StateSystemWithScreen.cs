@@ -5,21 +5,21 @@ namespace NoName.StateMachine
 {
 
     [System.Serializable]
-    public abstract class StateSystemWithScreen<T, U> : StateSystem<T> where T : StateData where U : UIScreen
+    public abstract class StateSystemWithScreen<Data, UI> : StateSystem<Data> where Data : StateData where UI : UIScreen
     {
         public override int InheritanceDeep => base.InheritanceDeep + 1;
 
         [Inject]
         private readonly UIHub _uiHub;
 
-        private U _screen;
+        private UI _screen;
 
-        public U Screen
+        public UI Screen
         {
             get
             {
                 if (Screen1 is null)
-                    Screen1 = UiHub.GetScreen<U>(State);
+                    Screen1 = UiHub.GetScreen<UI>(State);
 
                 return Screen1;
             }
@@ -27,6 +27,6 @@ namespace NoName.StateMachine
 
         public UIHub UiHub => _uiHub;
 
-        public U Screen1 { get => _screen; set => _screen = value; }
+        public UI Screen1 { get => _screen; set => _screen = value; }
     }
 }
