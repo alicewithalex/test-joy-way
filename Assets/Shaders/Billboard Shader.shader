@@ -1,6 +1,6 @@
 Shader "Custom/Billboard"
 {
-
+	//Was found on: https://en.wikibooks.org/wiki/Cg_Programming/Unity/Billboards
 
 	Properties
 	{
