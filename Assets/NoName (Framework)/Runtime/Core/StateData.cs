@@ -14,6 +14,9 @@ public abstract class StateData
     [Inject]
     public readonly ISavingPromoter SavingPromoter;
 
+    [Inject]
+    public readonly ILoader Loader;
+
     public Dictionary<string, ISaveable> Saveables { get; private set; }
 
     public void AddSaveable(ISaveable saveable)

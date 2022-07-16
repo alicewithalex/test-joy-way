@@ -1,5 +1,7 @@
+using alicewithalex.Data;
 using alicewithalex.UI;
 using NoName.StateMachine;
+using UnityEngine;
 
 namespace alicewithalex.Systems
 {
@@ -10,11 +12,22 @@ namespace alicewithalex.Systems
         public override void StateEnter()
         {
             base.StateEnter();
+
+            Screen.StartButton.onClick.AddListener(StartButtonPressed);
+            Screen.ExitButton.onClick.AddListener(ExitButtonPressed);
         }
 
         public override void StateExit()
         {
             base.StateExit();
+
+            Screen.StartButton.onClick.RemoveListener(StartButtonPressed);
+            Screen.ExitButton.onClick.RemoveListener(ExitButtonPressed);
         }
+
+        private void StartButtonPressed() => StateData.Loader.Load(State.Game, false);
+
+        private void ExitButtonPressed() => Application.Quit();
+
     }
 }

@@ -18,15 +18,13 @@ namespace NoName.StateMachine
         {
             get
             {
-                if (Screen1 is null)
-                    Screen1 = UiHub.GetScreen<UI>(State);
+                if (_screen is null)
+                    _screen = UiHub.GetScreen<UI>(State);
 
-                return Screen1;
+                return _screen;
             }
         }
 
         public UIHub UiHub => _uiHub;
-
-        public UI Screen1 { get => _screen; set => _screen = value; }
     }
 }

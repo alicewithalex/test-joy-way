@@ -67,6 +67,7 @@ namespace NoName.UI
         {
             if (_fadeTime <= 0)
             {
+                onValueChanged?.Invoke(1f);
                 onComplete?.Invoke();
                 return;
             }
@@ -95,6 +96,13 @@ namespace NoName.UI
         public void Collect()
         {
             _screens = GetComponentsInChildren<UIScreen>().ToList();
+
+#if UNITY_EDITOR
+
+            UnityEditor.EditorUtility.SetDirty(this);
+
+#endif
+
         }
 
         [Button("Show Preview")]
@@ -105,6 +113,12 @@ namespace NoName.UI
                 if (!screen.State.Equals(_previewScreen)) screen.Hide();
                 else screen.Show();
             }
+
+#if UNITY_EDITOR
+
+            UnityEditor.EditorUtility.SetDirty(this);
+
+#endif
         }
 
         [Button("Hide All")]
@@ -114,6 +128,13 @@ namespace NoName.UI
             {
                 screen.Hide();
             }
+
+#if UNITY_EDITOR
+
+            UnityEditor.EditorUtility.SetDirty(this);
+
+#endif
+
         }
 #endif
         #endregion

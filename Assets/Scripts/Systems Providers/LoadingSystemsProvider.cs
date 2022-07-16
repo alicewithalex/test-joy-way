@@ -9,6 +9,7 @@ namespace alicewithalex.Providers
         {
             List<IStateSystem> stateSystems = new List<IStateSystem>();
 
+            stateSystems.Add(new Systems.LoadingSystem());
 
             return stateSystems;
         }

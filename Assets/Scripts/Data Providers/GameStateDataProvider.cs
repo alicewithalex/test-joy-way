@@ -1,3 +1,4 @@
+using alicewithalex.Data;
 
 namespace alicewithalex.Providers
 {
@@ -5,7 +6,11 @@ namespace alicewithalex.Providers
     {
         public override StateData GetData()
         {
-            return null;
+            GameStateData gameStateData = new GameStateData();
+
+
+
+            return gameStateData;
         }
     }
 }
