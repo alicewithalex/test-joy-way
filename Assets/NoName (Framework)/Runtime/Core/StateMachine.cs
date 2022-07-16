@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace NoName.StateMachine
 {
-    public class StateMachine : IStateMachine, ISavingPromoter, ILoadingEventProvider, ILoader
+    public class StateMachine : IStateMachine, ILoader
     {
         const int DEFAULT_SYSTEM_CAPACITY = 16;
 
@@ -63,10 +63,8 @@ namespace NoName.StateMachine
                 if (_data[data.State] is null)
                 {
                     _data[data.State] = data;
-                    _data[data.State].InjectRecursievly(this, typeof(ILoadingEventProvider));
-                    _data[data.State].InjectRecursievly(this, typeof(ILoader));
                     _data[data.State].InjectRecursievly(this, typeof(IFactory), 1);
-                    _data[data.State].InjectRecursievly(this, typeof(ISavingPromoter), 1);
+                    _data[data.State].InjectRecursievly(this, typeof(ILoader));
                 }
                 else
                     throw new ArgumentException($"State data for ({data.State}) already was added!"
@@ -158,21 +156,6 @@ namespace NoName.StateMachine
                 InvokeStateExit(_current);
                 _stateTransition = StateTransition.Enter;
             }
-
-            if (_current.Equals(State.Loading) && !_loading)
-            {
-                _loading = true;
-
-                if (_fadeIn)
-                {
-                    _uiHub.Fade(true, OnFadeValueChanged, OnScreenFadeIn);
-                }
-                else
-                {
-                    OnFadeValueChanged?.Invoke(1f);
-                    OnScreenFadeIn();
-                }
-            }
         }
 
 
@@ -195,111 +178,37 @@ namespace NoName.StateMachine
         #region Saving and Loading
 
         public event Action<int> OnSaved;
-        public event Action<bool> OnLoadingStateChanged;
-        public event Action<float> OnFadeValueChanged;
-        public event Action<float> OnLoadingProgressChanged;
-
-        private State _stateToLoad;
-        private bool _loading;
-        private bool _fadeOut;
-        private bool _fadeIn;
         private int _loadSlot;
+        private State _loadState;
 
-        public void Load(State nextState, bool fadeIn = true, bool fadeOut = true)
+        public void Load(int slot = 0, State loadState = State.Game)
         {
-            _loading = false;
-
-            _fadeIn = fadeIn;
-            _fadeOut = fadeOut;
-
-            _stateToLoad = nextState;
-
-            ChangeStateInternal(State.Loading);
-        }
-
-        public void Load(int slot = 0)
-        {
-            _loading = false;
-            _stateToLoad = State.Game;
-
             _loadSlot = slot;
-            ChangeStateInternal(State.Loading);
-        }
-
-        private void OnScreenFadeIn()
-        {
-            OnLoadingStateChanged?.Invoke(true);
-
+            _loadState = loadState;
             _coroutineProvider.Run(LoadRoutine());
-        }
-
-        private void OnScreenFadeOut()
-        {
-            ChangeStateInternal(_stateToLoad);
-
-            _stateToLoad = State.None;
-            _loading = false;
         }
 
         private IEnumerator LoadRoutine()
         {
+            ChangeStateInternal(State.Loading);
+
             var loadData = _savePromoter.Load(_loadSlot);
 
-
-            if (loadData.Count > 0)
+            foreach (var loadPair in loadData)
             {
-                int saveablesAmount = loadData.Values.Select(x => x.Count).Aggregate((x, y) => x + y);
+                if (!_data.TryGetValue(loadPair.Key, out var stateData) || stateData == null) continue;
 
-                int i = 0;
-                foreach (var loadPair in loadData)
+                foreach (var savePair in loadPair.Value)
                 {
-                    if (!_data.TryGetValue(loadPair.Key, out var stateData) || stateData == null) continue;
+                    if (!stateData.Saveables.TryGetValue(savePair.Key, out var saveable)) continue;
+                    saveable.OnLoad(savePair.Value);
 
-                    foreach (var savePair in loadPair.Value)
-                    {
-                        if (!stateData.Saveables.TryGetValue(savePair.Key, out var saveable)) continue;
-                        saveable.OnLoad(savePair.Value);
-
-                        OnLoadingProgressChanged?.Invoke(i * 1f / saveablesAmount);
-
-                        i++;
-                        yield return null;
-                    }
+                    yield return null;
                 }
-
-                OnLoadingStateChanged?.Invoke(false);
             }
-            else
-            {
-                int ticks = 10;
-                float duration = 1f;
-                float current = 0;
-                float delta = duration / ticks;
-
-                OnLoadingProgressChanged?.Invoke(current);
-
-                while (current < 1f)
-                {
-                    yield return new WaitForSeconds(delta);
-                    current += delta;
-                    OnLoadingProgressChanged?.Invoke(Mathf.Clamp01(current));
-                }
-
-                OnLoadingStateChanged?.Invoke(false);
-            }
-
 
             Signals.Signals.Get<OnLoadingWasCompletedSignal>().Dispatch();
-
-            if (_fadeOut)
-            {
-                _uiHub.Fade(false, OnFadeValueChanged, OnScreenFadeOut);
-            }
-            else
-            {
-                OnFadeValueChanged?.Invoke(0f);
-                OnScreenFadeOut();
-            }
+            ChangeStateInternal(_loadState);
         }
 
         public void LoadLastSave()

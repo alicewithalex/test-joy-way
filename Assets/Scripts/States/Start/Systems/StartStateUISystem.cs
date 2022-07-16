@@ -25,7 +25,7 @@ namespace alicewithalex.Systems
             Screen.ExitButton.onClick.RemoveListener(ExitButtonPressed);
         }
 
-        private void StartButtonPressed() => StateData.Loader.Load(State.Game, false);
+        private void StartButtonPressed() => ChangeState(State.Game);
 
         private void ExitButtonPressed() => Application.Quit();
 

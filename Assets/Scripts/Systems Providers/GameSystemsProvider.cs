@@ -9,6 +9,10 @@ namespace alicewithalex.Providers
         {
             List<IStateSystem> stateSystems = new List<IStateSystem>();
 
+            stateSystems.Add(new Systems.PlayerRotationSystem());
+            stateSystems.Add(new Systems.PlayerGravitationSystem());
+            stateSystems.Add(new Systems.PlayerMovementSystem());
+            stateSystems.Add(new Systems.PlayerLocomotionEvaluateSystem());
 
             return stateSystems;
         }

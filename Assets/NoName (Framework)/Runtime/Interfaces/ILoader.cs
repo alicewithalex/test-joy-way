@@ -2,6 +2,6 @@ namespace NoName.StateMachine
 {
     public interface ILoader
     {
-        void Load(State state, bool fadeIn = true, bool fadeOut = true);
+        void Load(int slot = 0, State state = State.Game);
     }
 }

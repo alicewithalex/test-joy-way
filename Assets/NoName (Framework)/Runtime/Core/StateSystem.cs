@@ -4,21 +4,21 @@ using UnityEngine;
 namespace NoName.StateMachine
 {
     [System.Serializable]
-    public abstract class StateSystem<T> : IStateSystem where T : StateData
+    public abstract class StateSystem<Data> : IStateSystem where Data : StateData
     {
         public virtual int InheritanceDeep => 1;
 
         public abstract State State { get; }
 
         [Inject]
-        private readonly T _stateData;
+        private readonly Data _stateData;
 
         [Inject]
         private readonly IStateMachine _stateMachine;
 
         private Vector2 _input;
 
-        public T StateData => _stateData;
+        public Data StateData => _stateData;
 
         protected Vector2 InputDirection => _input.normalized;
 

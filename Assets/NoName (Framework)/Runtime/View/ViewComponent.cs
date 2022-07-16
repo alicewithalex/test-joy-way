@@ -1,9 +1,9 @@
 
 
-public abstract class ViewComponent<T> : AbstractViewComponent where T : StateData
+public abstract class ViewComponent<Data> : AbstractViewComponent where Data : StateData
 {
-    public override void Process(StateData stateData) => Process(stateData as T);
+    public override void Process(StateData stateData) => Process(stateData as Data);
 
-    protected abstract void Process(T stateData);
+    protected abstract void Process(Data stateData);
 
 }
