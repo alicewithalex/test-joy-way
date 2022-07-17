@@ -4,12 +4,12 @@ namespace alicewithalex.Data
 {
     public class Pickable
     {
-        public readonly ItemType PickupType;
+        public readonly ItemType ItemType;
         public readonly Transform Transform;
 
         public Pickable(ItemType pickupType, Transform transform)
         {
-            PickupType = pickupType;
+            ItemType = pickupType;
             Transform = transform;
         }
 

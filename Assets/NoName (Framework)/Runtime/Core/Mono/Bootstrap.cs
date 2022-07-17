@@ -51,7 +51,7 @@ namespace NoName.StateMachine
             {
                 if (!_data.ContainsKey(provider.State))
                 {
-                    _data.Add(provider.State, provider.GetData());
+                    _data.Add(provider.State, provider.GetData(_monoContainer.Container));
                 }
                 else
                 {

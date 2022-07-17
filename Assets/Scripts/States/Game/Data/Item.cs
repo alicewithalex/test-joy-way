@@ -2,15 +2,19 @@ using UnityEngine;
 
 namespace alicewithalex.Data
 {
+    [System.Serializable]
     public class Item
     {
-        public readonly ItemType ItemType;
-        public readonly Transform Transform;
+        [SerializeField] private ItemType _itemType;
+        [SerializeField] private Transform _transform;
+
+        public ItemType ItemType => _itemType;
+        public Transform Transform => _transform;
 
         public Item(ItemType itemType, Transform transform)
         {
-            ItemType = itemType;
-            Transform = transform;
+            _itemType = itemType;
+            _transform = transform;
         }
 
         public void Show() => Transform.gameObject.SetActive(true);

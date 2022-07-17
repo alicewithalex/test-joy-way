@@ -4,6 +4,6 @@ namespace NoName.StateMachine
 {
     public interface IStateDataProvider
     {
-        StateData GetData();
+        StateData GetData(IContainer container);
     }
 }

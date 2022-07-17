@@ -20,7 +20,9 @@ namespace alicewithalex.Data
         private float _xRot;
         private float _yRot;
 
-        public Pickable Pickable;
+        public Pickable LookAt;
+
+        public Ray LookRay => new Ray(_camera.position, _camera.forward);
 
         public Player(CharacterController characterController, Transform camera, MovementConfig config)
         {

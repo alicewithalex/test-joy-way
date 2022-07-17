@@ -13,10 +13,15 @@ namespace alicewithalex.Providers
 
             systems
 
+                .Add(new Systems.InventorySystem())
+
                 .Add(new Systems.PlayerRotationSystem())
                 .Add(new Systems.PlayerGravitationSystem())
                 .Add(new Systems.PlayerMovementSystem())
                 .Add(new Systems.PlayerEvaluateSystem())
+
+                .Add(new Systems.PlayerObtainSystem())
+                .Add(new Systems.PlayerPickupSystem())
 
                 ;
 

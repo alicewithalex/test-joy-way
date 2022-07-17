@@ -5,5 +5,5 @@ using UnityEngine;
 public abstract class StateDataProvider : MonoBehaviour, IStateDataProvider
 {
     public abstract State State { get; }
-    public abstract StateData GetData();
+    public abstract StateData GetData(IContainer container);
 }

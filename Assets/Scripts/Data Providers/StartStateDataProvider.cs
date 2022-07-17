@@ -8,7 +8,7 @@ namespace alicewithalex.Providers
     {
         public override State State => State.Start;
 
-        public override StateData GetData()
+        public override StateData GetData(IContainer container)
         {
             return new StartStateData();
         }
