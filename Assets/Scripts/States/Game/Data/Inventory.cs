@@ -29,11 +29,11 @@ namespace alicewithalex.Data
             else return ItemType.None;
         }
 
-        public bool Add(SlotType slotType, ItemType itemType)
+        public bool Add(SlotType slotType, Pickable pickable)
         {
             if (!HasHand(slotType) || IsHolding(slotType)) return false;
 
-            _items.Add(slotType, _hands[slotType].GetItem(itemType));
+            _items.Add(slotType, _hands[slotType].GetItem(pickable.ItemType));
 
             if (_items[slotType] is null)
             {
@@ -41,19 +41,22 @@ namespace alicewithalex.Data
                 return false;
             }
 
+            _items[slotType].Pickable = pickable;
             _items[slotType].Show();
 
             return true;
         }
 
-        public bool Remove(SlotType slotType)
+        public Pickable Remove(SlotType slotType)
         {
-            if (!HasHand(slotType) || (!IsHolding(slotType))) return false;
+            if (!HasHand(slotType) || (!IsHolding(slotType))) return null;
 
+            var pickable = _items[slotType].Pickable;
+            _items[slotType].Pickable = null;
             _items[slotType].Hide();
             _items.Remove(slotType);
 
-            return true;
+            return pickable;
         }
     }
 }

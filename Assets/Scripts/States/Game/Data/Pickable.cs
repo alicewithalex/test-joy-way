@@ -15,5 +15,8 @@ namespace alicewithalex.Data
 
         public bool Obtainable;
 
+        public void Show() => Transform.gameObject.SetActive(true);
+        public void Hide() => Transform.gameObject.SetActive(false);
+
     }
 }

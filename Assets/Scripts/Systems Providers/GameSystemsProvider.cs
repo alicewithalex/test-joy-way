@@ -20,8 +20,9 @@ namespace alicewithalex.Providers
                 .Add(new Systems.PlayerMovementSystem())
                 .Add(new Systems.PlayerEvaluateSystem())
 
-                .Add(new Systems.PlayerObtainSystem())
+                .Add(new Systems.PlayerItemTargetSystem())
                 .Add(new Systems.PlayerPickupSystem())
+                .Add(new Systems.PlayerDropSystem())
 
                 ;
 

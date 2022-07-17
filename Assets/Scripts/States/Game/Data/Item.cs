@@ -17,6 +17,8 @@ namespace alicewithalex.Data
             _transform = transform;
         }
 
+        public Pickable Pickable;
+
         public void Show() => Transform.gameObject.SetActive(true);
         public void Hide() => Transform.gameObject.SetActive(false);
     }

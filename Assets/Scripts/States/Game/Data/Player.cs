@@ -6,8 +6,9 @@ namespace alicewithalex.Data
 {
     public class Player
     {
+        public readonly Transform Transform;
+
         private readonly CharacterController _characterController;
-        private readonly Transform _transform;
         private readonly Transform _camera;
 
         private readonly MovementConfig _config;
@@ -29,7 +30,7 @@ namespace alicewithalex.Data
             _characterController = characterController;
             _camera = camera;
             _config = config;
-            _transform = _characterController.transform;
+            Transform = _characterController.transform;
         }
 
 
@@ -40,7 +41,7 @@ namespace alicewithalex.Data
 
             _xRot = Mathf.Clamp(_xRot, minPitch, maxPitch);
 
-            _transform.localEulerAngles = new Vector3(0f, _yRot, 0f);
+            Transform.localEulerAngles = new Vector3(0f, _yRot, 0f);
             _camera.localEulerAngles = new Vector3(_xRot, 0f, 0f);
         }
 
@@ -60,7 +61,7 @@ namespace alicewithalex.Data
             _currentSpeed = Mathf.Lerp(_currentSpeed, inputDirection.magnitude * _config.MovementSpeed,
                 _config.MovementSmoothness * deltaTime);
 
-            _velocity = _transform.TransformDirection(new Vector3(inputDirection.x, 0f, inputDirection.y)) * _currentSpeed;
+            _velocity = Transform.TransformDirection(new Vector3(inputDirection.x, 0f, inputDirection.y)) * _currentSpeed;
         }
 
         public void Evaluate(float deltaTime)

@@ -15,18 +15,18 @@ namespace alicewithalex.Systems
 
             if (_stateData.Input.LeftHandPressed)
             {
-                if (_stateData.Inventory.Add(SlotType.LeftHand, _stateData.Player.LookAt.ItemType))
+                if (_stateData.Inventory.Add(SlotType.LeftHand, _stateData.Player.LookAt))
                 {
-                    _stateData.Player.LookAt.Transform.gameObject.SetActive(false);
+                    _stateData.Player.LookAt.Hide();
                     _stateData.Player.LookAt = null;
                 }
             }
 
             if (_stateData.Input.RightHandPressed)
             {
-                if (_stateData.Inventory.Add(SlotType.RightHand, _stateData.Player.LookAt.ItemType))
+                if (_stateData.Inventory.Add(SlotType.RightHand, _stateData.Player.LookAt))
                 {
-                    _stateData.Player.LookAt.Transform.gameObject.SetActive(false);
+                    _stateData.Player.LookAt.Hide();
                     _stateData.Player.LookAt = null;
                 }
             }
