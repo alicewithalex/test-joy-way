@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4116833282809988191
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 445093066536108495}
+    m_Modifications:
+    - target: {fileID: 3587887765110171324, guid: aed47b3041b72d54893f802e4d2b3834, type: 3}
+      propertyPath: m_Name
+      value: Water Stone View
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587887765110171327, guid: aed47b3041b72d54893f802e4d2b3834, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587887765110171327, guid: aed47b3041b72d54893f802e4d2b3834, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587887765110171327, guid: aed47b3041b72d54893f802e4d2b3834, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587887765110171327, guid: aed47b3041b72d54893f802e4d2b3834, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587887765110171327, guid: aed47b3041b72d54893f802e4d2b3834, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587887765110171327, guid: aed47b3041b72d54893f802e4d2b3834, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587887765110171327, guid: aed47b3041b72d54893f802e4d2b3834, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587887765110171327, guid: aed47b3041b72d54893f802e4d2b3834, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587887765110171327, guid: aed47b3041b72d54893f802e4d2b3834, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587887765110171327, guid: aed47b3041b72d54893f802e4d2b3834, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587887765110171327, guid: aed47b3041b72d54893f802e4d2b3834, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aed47b3041b72d54893f802e4d2b3834, type: 3}
+--- !u!1001 &4116833284042601483
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4543190593354221949, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.6252799
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543190593354221949, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543190594822193827, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543190594822193827, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543190594822193827, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543190594822193827, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543190594822193827, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543190594822193827, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543190594822193827, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543190594822193827, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543190594822193827, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543190594822193827, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543190594822193827, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543190594822193836, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: m_Name
+      value: Water Stone [Pickup]
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+--- !u!4 &445093066536108495 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4543190595035919812, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+  m_PrefabInstance: {fileID: 4116833284042601483}
+  m_PrefabAsset: {fileID: 0}
