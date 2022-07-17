@@ -1,142 +1,30 @@
 using NoName.Debugging;
-using NoName.Factory;
-using NoName.Injection;
-using NoName.Saving;
-using NoName.Signals;
-using NoName.UI;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace NoName.StateMachine
 {
-    public class StateMachine : IStateMachine, ILoader
+    public class StateMachine : IStateMachine
     {
-        const int DEFAULT_SYSTEM_CAPACITY = 16;
-
-        private readonly Dictionary<State, List<IStateSystem>> _systems =
-            new Dictionary<State, List<IStateSystem>>();
-
-        private readonly Dictionary<State, StateData> _data =
-            new Dictionary<State, StateData>();
-
-        private readonly Dictionary<Type, AbstractFactory> _factories =
-          new Dictionary<Type, AbstractFactory>();
-
-        private readonly ITimer<State> _timer;
-        private readonly ICoroutineProvider _coroutineProvider;
-        private readonly UIHub _uiHub;
-        private readonly SavePromoter _savePromoter = new SavePromoter();
-
         private State _current;
-        private StateTransition _stateTransition;
         private State _next;
 
-        public StateMachine(State initialiState, UIHub uiHub,
-            ITimer<State> timer, IContainer container,
-            ICoroutineProvider coroutineProvider,
-            IList<StateSystemsProvider> stateSystemsProviders,
-            IList<StateDataProvider> stateDataProviders)
+        private StateTransition _stateTransition;
+
+        private bool _dirty;
+
+        public State State => _current;
+
+        public event Action<State> OnStateEnter;
+        public event Action<State> OnStateUpdate;
+        public event Action<State> OnStateExit;
+
+        public StateMachine(State initialiState)
         {
-            _next = _current = initialiState;
-            _uiHub = uiHub;
-            _timer = timer;
-            _coroutineProvider = coroutineProvider;
-
-            _uiHub.Initialize();
-
-            //Init all states with empty or null references
-            State state = default(State);
-            foreach (var s in Enum.GetValues(typeof(State)))
-            {
-                state = (State)s;
-                _data.Add(state, null);
-                _systems.Add(state, new List<IStateSystem>(DEFAULT_SYSTEM_CAPACITY));
-            }
-
-            //Data
-            foreach (var provider in stateDataProviders)
-            {
-                var data = provider.GetData();
-                if (_data[data.State] is null)
-                {
-                    _data[data.State] = data;
-                    _data[data.State].InjectRecursievly(this, typeof(IFactory), 1);
-                    _data[data.State].InjectRecursievly(this, typeof(ILoader));
-                }
-                else
-                    throw new ArgumentException($"State data for ({data.State}) already was added!"
-                        .Colorize(DColor.Magenta, true));
-            }
-
-            //Systems
-            foreach (var provider in stateSystemsProviders)
-            {
-                foreach (var system in provider.GetStateSystems(container))
-                {
-                    _systems[system.State].Add(system);
-
-                    //Inject state-machine,factory,UI hub and state data 
-                    system.InjectRecursievly(this, typeof(IStateMachine), system.InheritanceDeep);
-                    system.InjectRecursievly(uiHub, system.InheritanceDeep);
-                    if (!(_data[system.State] is null))
-                        system.InjectRecursievly(_data[system.State], system.InheritanceDeep);
-
-
-                }
-            }
-
-            Initialize();
-        }
-
-        #region Private Methods
-
-        private void Initialize()
-        {
-            // Initialize all views
-            foreach (var viewComponent in GameObject.FindObjectsOfType<AbstractViewComponent>())
-            {
-                viewComponent.Process(_data[viewComponent.State]);
-            }
-
-            // Initialize all systems
-            foreach (var systems in _systems.Values)
-                foreach (var system in systems)
-                    system.Initialize();
-
-            // Invoke current state to state enter
+            _current = State.None;
+            _next = initialiState;
 
             _stateTransition = StateTransition.Enter;
-        }
-        private void InvokeStateEnter(State state)
-        {
-            _uiHub.Show(state);
-            foreach (var system in _systems[state])
-                system.StateEnter();
-        }
-        private void InvokeStateExit(State state)
-        {
-            _uiHub.Hide(state);
-            foreach (var system in _systems[state])
-                system.StateExit();
-        }
-
-        private void ChangeStateInternal(State nextState)
-        {
-            _stateTransition = StateTransition.Exit;
-            _next = nextState;
-        }
-
-        #endregion
-
-        #region Core
-
-        public void FixedTick()
-        {
-            foreach (var system in _systems[_current])
-                system.StateFixedUpdate();
         }
 
         public void Tick()
@@ -144,116 +32,38 @@ namespace NoName.StateMachine
             if (_stateTransition.Equals(StateTransition.Enter))
             {
                 _current = _next;
-                InvokeStateEnter(_current);
-                _stateTransition = StateTransition.None;
-            }
+                OnStateEnter?.Invoke(_current);
 
-            foreach (var system in _systems[_current])
-                system.StateUpdate();
+                Debug.Log($"{"State Enter:".Colorize(DColor.White, true)} {_current.Colorize(DColor.Orange)}");
 
-            if (_stateTransition.Equals(StateTransition.Exit))
-            {
-                InvokeStateExit(_current);
-                _stateTransition = StateTransition.Enter;
-            }
-        }
-
-
-        public void LateTick()
-        {
-            foreach (var system in _systems[_current])
-                system.StateLateUpdate();
-        }
-
-        public void Destroy()
-        {
-            foreach (var systems in _systems.Values)
-                foreach (var system in systems)
-                    system.Destroy();
-
-        }
-
-        #endregion
-
-        #region Saving and Loading
-
-        public event Action<int> OnSaved;
-        private int _loadSlot;
-        private State _loadState;
-
-        public void Load(int slot = 0, State loadState = State.Game)
-        {
-            _loadSlot = slot;
-            _loadState = loadState;
-            _coroutineProvider.Run(LoadRoutine());
-        }
-
-        private IEnumerator LoadRoutine()
-        {
-            ChangeStateInternal(State.Loading);
-
-            var loadData = _savePromoter.Load(_loadSlot);
-
-            foreach (var loadPair in loadData)
-            {
-                if (!_data.TryGetValue(loadPair.Key, out var stateData) || stateData == null) continue;
-
-                foreach (var savePair in loadPair.Value)
+                if (!_dirty)
                 {
-                    if (!stateData.Saveables.TryGetValue(savePair.Key, out var saveable)) continue;
-                    saveable.OnLoad(savePair.Value);
-
-                    yield return null;
+                    _next = State.None;
+                    _stateTransition = StateTransition.None;
                 }
             }
 
-            Signals.Signals.Get<OnLoadingWasCompletedSignal>().Dispatch();
-            ChangeStateInternal(_loadState);
-        }
-
-        public void LoadLastSave()
-        {
-            Load(_savePromoter.LastSlotSaved);
-        }
-
-        public void Save(int slot = 0)
-        {
-            foreach (var data in _data)
+            if (_stateTransition.Equals(StateTransition.None))
             {
-                if (data.Value == null) continue;
-
-                _savePromoter.Save(data.Key, data.Value.Saveables.Values.ToList(), slot);
+                OnStateUpdate?.Invoke(_current);
             }
 
-            OnSaved?.Invoke(slot);
-        }
-
-        public bool IsSlotEmpty(int slot)
-        {
-            return _savePromoter.IsSlotEmpty(slot);
-        }
-
-
-        #endregion
-
-        #region Public Methods
-
-        public void ChangeState(State nextState, float delay = 0)
-        {
-            if (_timer.Running)
-                _timer.Cancel();
-
-            if (delay > 0)
+            if (_stateTransition.Equals(StateTransition.Exit))
             {
-                _timer.StartTimer(delay, nextState, ChangeStateInternal);
-            }
-            else
-            {
-                ChangeStateInternal(nextState);
+                OnStateExit?.Invoke(_current);
+
+                Debug.Log($"{"State Exit:".Colorize(DColor.White, true)} {_current.Colorize(DColor.Orange)}");
+
+                if (!_dirty) _stateTransition = StateTransition.Enter;
             }
         }
 
-        #endregion
+        public void ChangeState(State nextState)
+        {
+            _dirty = true;
 
+            _stateTransition = StateTransition.Exit;
+            _next = nextState;
+        }
     }
 }

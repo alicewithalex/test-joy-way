@@ -1,20 +1,12 @@
-using alicewithalex.Data;
-using NoName.StateMachine;
-using UnityEngine;
+using NoName.Systems;
 
 namespace alicewithalex.Systems
 {
-    public class PlayerRotationSystem : StateSystem<GameStateData>
+    public class PlayerRotationSystem : IStateUpdateSystem
     {
-        public override State State => State.Game;
-
-        public override void StateUpdate()
+        public void StateUpdate()
         {
-            base.StateUpdate();
-
-            if (StateData.Player is null) return;
-
-            StateData.Player.ApplyRotation(MouseInput, Time.deltaTime);
+            
         }
     }
 }

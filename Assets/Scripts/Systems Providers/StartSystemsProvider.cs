@@ -1,17 +1,33 @@
+using NoName.Injection;
 using NoName.StateMachine;
-using System.Collections.Generic;
+using NoName.Systems;
+using NoName.UI;
 
 namespace alicewithalex.Providers
 {
     public class StartSystemsProvider : StateSystemsProvider
     {
-        public override IList<IStateSystem> GetStateSystems(IContainer container)
+        internal class Dependencies
         {
-            List<IStateSystem> stateSystems = new List<IStateSystem>();
+            [Inject] public UIHub UIHub;
+        }
 
-            stateSystems.Add(new Systems.StartStateUISystem());
+        public override State State => State.Start;
 
-            return stateSystems;
+        public override StateSystems GetStateSystems(IContainer container)
+        {
+            var dependencies = new Dependencies();
+            container.Inject(dependencies);
+
+            var systems = new StateSystems();
+
+            systems
+
+                .Add(new Systems.StartMenuSystem(dependencies.UIHub))
+
+                ;
+
+            return systems;
         }
     }
 }

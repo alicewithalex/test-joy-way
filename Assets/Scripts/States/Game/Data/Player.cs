@@ -21,6 +21,8 @@ namespace alicewithalex.Data
         private float _xRot;
         private float _yRot;
 
+        public Pickable Pickable;
+
         public Player(CharacterController characterController, Transform camera, LocomotionConfig locomotionConfig)
         {
             _characterController = characterController;

@@ -48,7 +48,7 @@ namespace NoName.UI
         public T GetScreen<T>(State state) where T : UIScreen
         {
             if (!_screenStateMap.ContainsKey(state)) throw new KeyNotFoundException(
-                 $"There are no UI Screen for {state.ToString().Colorize(DColor.Mint, true)} state");
+                 $"There are no UI Screen for {state.ToString().Colorize(DColor.Mint, true)}state");
 
             return _screenStateMap[state] as T;
         }

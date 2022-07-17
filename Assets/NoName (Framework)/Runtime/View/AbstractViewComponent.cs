@@ -1,3 +1,4 @@
+using NoName.Data;
 using NoName.StateMachine;
 using UnityEngine;
 

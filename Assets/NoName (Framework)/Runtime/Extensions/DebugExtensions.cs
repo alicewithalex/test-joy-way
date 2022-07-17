@@ -34,14 +34,14 @@ namespace NoName.Debugging
         {
             var color = GetColorFromString(textColor);
 
-            return $"{(bold?"<b>":string.Empty)}<color=#{color}>{str}</color>{(bold?" </b> ":string.Empty)}";
+            return $"{(bold?"<b>":string.Empty)}<color=#{color}>{str}</color>{(bold?"</b>":string.Empty)}";
         }
 
         public static string Colorize(this object obj, DColor textColor, bool bold = false)
         {
             var color = GetColorFromString(textColor);
 
-            return $"{(bold ? "<b>" : string.Empty)}<color=#{color}>{obj}</color>{(bold ? " </b> " : string.Empty)}";
+            return $"{(bold ? "<b>" : string.Empty)}<color=#{color}>{obj}</color>{(bold ? "</b>" : string.Empty)}";
         }
 
         private static string GetColorFromString(DColor color)

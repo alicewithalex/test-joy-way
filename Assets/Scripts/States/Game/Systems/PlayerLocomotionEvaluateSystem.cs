@@ -4,17 +4,5 @@ using UnityEngine;
 
 namespace alicewithalex.Systems
 {
-    public class PlayerLocomotionEvaluateSystem : StateSystem<GameStateData>
-    {
-        public override State State => State.Game;
-
-        public override void StateUpdate()
-        {
-            base.StateUpdate();
-
-            if (StateData.Player is null) return;
-
-            StateData.Player.Evaluate(Time.deltaTime);
-        }
-    }
+    public class PlayerLocomotionEvaluateSystem { }
 }

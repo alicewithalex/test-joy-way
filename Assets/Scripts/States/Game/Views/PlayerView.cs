@@ -7,15 +7,11 @@ namespace alicewithalex.Views
 {
     public class PlayerView : ViewComponent<GameStateData>
     {
-        [SerializeField] private CharacterController _characterController;
-        [SerializeField] private Transform _camera;
-        [SerializeField] private LocomotionConfig _locomotionConfig;
-
-        public override State State => State.Game;
+        public override State State => throw new System.NotImplementedException();
 
         protected override void Process(GameStateData stateData)
         {
-            stateData.Player = new Player(_characterController, _camera, _locomotionConfig);
+            throw new System.NotImplementedException();
         }
     }
 }

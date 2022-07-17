@@ -26,13 +26,17 @@ public class MonoContainer : MonoBehaviour
         }
     }
 
-#if UNITY_EDITOR
 
     [Button("Collect")]
     private void Collect()
     {
         _binders = GetComponentsInChildren<Binder>().ToList();
+
+#if UNITY_EDITOR
+
+        UnityEditor.EditorUtility.SetDirty(this);
+#endif
+
     }
 
-#endif
 }

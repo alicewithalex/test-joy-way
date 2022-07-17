@@ -1,17 +1,17 @@
 using NoName.StateMachine;
-using System.Collections.Generic;
+using NoName.Systems;
 
 namespace alicewithalex.Providers
 {
     public class LoadingSystemsProvider : StateSystemsProvider
     {
-        public override IList<IStateSystem> GetStateSystems(IContainer container)
+        public override State State => State.Loading;
+
+        public override StateSystems GetStateSystems(IContainer container)
         {
-            List<IStateSystem> stateSystems = new List<IStateSystem>();
+            var systems = new StateSystems();
 
-            stateSystems.Add(new Systems.LoadingSystem());
-
-            return stateSystems;
+            return systems;
         }
     }
 }

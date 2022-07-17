@@ -1,11 +1,15 @@
+using alicewithalex.Configs;
+using NoName.Data;
 using NoName.StateMachine;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace alicewithalex.Data
 {
     public class GameStateData : StateData
     {
-        public override State State => State.Game;
-
-        public Player Player;
+        public GameStateData()
+        {
+        }
     }
 }

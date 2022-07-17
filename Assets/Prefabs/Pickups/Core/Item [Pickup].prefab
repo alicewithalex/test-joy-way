@@ -4900,6 +4900,7 @@ GameObject:
   - component: {fileID: 4543190594822193827}
   - component: {fileID: 4543190594822193826}
   - component: {fileID: 9141781161611646292}
+  - component: {fileID: 4102060874532894463}
   m_Layer: 31
   m_Name: Item [Pickup]
   m_TagString: Untagged
@@ -4955,6 +4956,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 1.5, z: 0.8}
   m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!114 &4102060874532894463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543190594822193836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c73408ca36d827543866ec79c98dbbf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pickupType: 0
 --- !u!1 &4543190595035919813
 GameObject:
   m_ObjectHideFlags: 0

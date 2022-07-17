@@ -1,19 +1,17 @@
 using alicewithalex.Data;
+using NoName.Data;
+using NoName.StateMachine;
 using UnityEngine;
 
 namespace alicewithalex.Providers
 {
     public class LoadingStateDataProvider : StateDataProvider
     {
-        [SerializeField] private Material _overlayMaterial;
+        public override State State => State.Loading;
 
         public override StateData GetData()
         {
-            LoadingStateData loadingStateData = new LoadingStateData();
-
-            loadingStateData.OverlayMaterial = _overlayMaterial;
-
-            return loadingStateData;
+            return new LoadingStateData();
         }
     }
 }

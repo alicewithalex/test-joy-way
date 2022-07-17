@@ -1,27 +1,44 @@
-using NoName.Injection;
-using NoName.StateMachine;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
-public abstract class StateData
+namespace NoName.Data
 {
-    protected StateData()
+    public abstract class StateData
     {
-        Saveables = new Dictionary<string, ISaveable>();
-    }
+        private readonly Dictionary<Type, HashSet<object>> _trash;
 
-    public abstract State State { get; }
+        protected StateData()
+        {
+            _trash = new Dictionary<Type, HashSet<object>>();
+        }
 
-    [Inject]
-    public readonly ISavingPromoter SavingPromoter;
+        public void Destroy<T>(T @object)
+        {
+            var type = typeof(T);
 
-    [Inject]
-    public readonly ILoader Loader;
+            if (!_trash.ContainsKey(type))
+            {
+                _trash.Add(type, new HashSet<object>());
+            }
 
-    public Dictionary<string, ISaveable> Saveables { get; private set; }
+            _trash[type].Add(@object);
+        }
 
-    public void AddSaveable(ISaveable saveable)
-    {
-        if (Saveables.ContainsKey(saveable.Identificator)) return;
-        Saveables.Add(saveable.Identificator, saveable);
+        public bool Exist<T>(out IEnumerable<T> @objects)
+        {
+            @objects = null;
+
+            if (_trash.TryGetValue(typeof(T), out var set))
+            {
+                @objects = set.Select(x => (T)x);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public void Clean() => _trash.Clear();
     }
 }

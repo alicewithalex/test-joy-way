@@ -64,6 +64,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4102060874532894463, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: _pickupType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4543190593354221949, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0
