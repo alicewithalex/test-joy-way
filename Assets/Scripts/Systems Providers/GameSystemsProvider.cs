@@ -1,7 +1,5 @@
-using alicewithalex.Systems;
 using NoName.StateMachine;
 using NoName.Systems;
-using System.Collections.Generic;
 
 namespace alicewithalex.Providers
 {
@@ -13,6 +11,14 @@ namespace alicewithalex.Providers
         {
             var systems = new StateSystems();
 
+            systems
+
+                .Add(new Systems.PlayerRotationSystem())
+                .Add(new Systems.PlayerGravitationSystem())
+                .Add(new Systems.PlayerMovementSystem())
+                .Add(new Systems.PlayerEvaluateSystem())
+
+                ;
 
             return systems;
         }

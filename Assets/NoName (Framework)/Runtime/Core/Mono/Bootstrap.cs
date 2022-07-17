@@ -86,6 +86,15 @@ namespace NoName.StateMachine
             }
         }
 
+        private void SetupViews()
+        {
+            foreach (var view in FindObjectsOfType<AbstractViewComponent>())
+            {
+                if (_data.ContainsKey(view.State))
+                    view.Process(_data[view.State]);
+            }
+        }
+
         private void InitializeSystems()
         {
             foreach (var systems in _systems.Values)
@@ -112,8 +121,10 @@ namespace NoName.StateMachine
             SetupStateMachine();
             SetupData();
             SetupSystems();
+            SetupViews();
             InitializeSystems();
         }
+
 
 
         private void Update()

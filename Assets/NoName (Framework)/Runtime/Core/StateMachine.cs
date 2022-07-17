@@ -36,11 +36,9 @@ namespace NoName.StateMachine
 
                 Debug.Log($"{"State Enter:".Colorize(DColor.White, true)} {_current.Colorize(DColor.Orange)}");
 
-                if (!_dirty)
-                {
-                    _next = State.None;
-                    _stateTransition = StateTransition.None;
-                }
+                _next = State.None;
+                _stateTransition = StateTransition.None;
+
             }
 
             if (_stateTransition.Equals(StateTransition.None))
@@ -54,14 +52,12 @@ namespace NoName.StateMachine
 
                 Debug.Log($"{"State Exit:".Colorize(DColor.White, true)} {_current.Colorize(DColor.Orange)}");
 
-                if (!_dirty) _stateTransition = StateTransition.Enter;
+                _stateTransition = StateTransition.Enter;
             }
         }
 
         public void ChangeState(State nextState)
         {
-            _dirty = true;
-
             _stateTransition = StateTransition.Exit;
             _next = nextState;
         }

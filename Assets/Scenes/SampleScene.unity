@@ -2635,6 +2635,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a018cddf9b2887e46b19349239d44bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _inputConfig: {fileID: 11400000, guid: 5a99f28db5744414eb8643cca04247ee, type: 2}
+  _mouseConfig: {fileID: 11400000, guid: 3ec6cd2cd713d6346b4334c750de42ae, type: 2}
 --- !u!1001 &1542420829
 PrefabInstance:
   m_ObjectHideFlags: 0

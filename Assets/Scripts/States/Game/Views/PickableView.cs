@@ -6,11 +6,11 @@ namespace alicewithalex.Views
 {
     public class PickableView : ViewComponent<GameStateData>
     {
-        public override State State => throw new System.NotImplementedException();
+        public override State State => State.Game;
 
         protected override void Process(GameStateData stateData)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }
