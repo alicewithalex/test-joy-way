@@ -132,6 +132,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire Stone [Pickup]
       objectReference: {fileID: 0}
+    - target: {fileID: 6235460765148583284, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.12132263
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235460765148583284, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235460765148583284, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6246490125111164871, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
       propertyPath: _force
       value: 3

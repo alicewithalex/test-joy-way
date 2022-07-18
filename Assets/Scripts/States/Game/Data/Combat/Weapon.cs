@@ -1,6 +1,7 @@
 using alicewithalex.Configs;
 using alicewithalex.Interfaces;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace alicewithalex.Data
 {
@@ -13,6 +14,8 @@ namespace alicewithalex.Data
         [SerializeField] protected StatusConfig _statusConfig;
         [SerializeField] protected Transform _origin;
 
+        [SerializeField] private UnityEvent _onInteract;
+
         public override void Interact(KeyCode key)
         {
             if (!IsUsing(key) || !_projectileConfig) return;
@@ -21,6 +24,8 @@ namespace alicewithalex.Data
 
             projectile.OnProjectileHitsTarget += OnHitTarget;
             projectile.OnProjectileVanished += DestroyProjectile;
+
+            _onInteract?.Invoke();
 
             Data.Projectiles.Add(projectile);
         }

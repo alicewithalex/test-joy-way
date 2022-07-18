@@ -128,6 +128,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Water Stone [Pickup]
       objectReference: {fileID: 0}
+    - target: {fileID: 6235460765148583284, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.6674869
+      objectReference: {fileID: 0}
+    - target: {fileID: 6235460765148583284, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6246490125111164871, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
       propertyPath: _itemType
       value: 3
