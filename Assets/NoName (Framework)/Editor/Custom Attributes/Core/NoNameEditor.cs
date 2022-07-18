@@ -44,7 +44,9 @@ namespace NoName.EditorExtended
 
                 if(Application.isPlaying == false)
                 {
-                    EditorUtility.SetDirty(target);
+#if UNITY_EDITOR
+                    UnityEditor.EditorUtility.SetDirty(target);
+#endif
                 }
             }
         }

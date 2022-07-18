@@ -63,6 +63,8 @@ namespace alicewithalex.Data
             if (_status != null && modifiable)
                 amount = _status.Modify(amount);
 
+            Debug.Log(amount);
+
             Health -= amount;
         }
 
@@ -76,24 +78,21 @@ namespace alicewithalex.Data
             if (negating)
             {
                 ClearStatus();
-                return false;
             }
-            else
-            {
-                if (affected)
-                {
-                    ClearStatus();
-                    _status = status;
-                    _status.OnStatusEnded += RemoveStatus;
-                }
-                else if (FireWaterPercentage == 0)
-                {
-                    ClearStatus();
-                    _status = null;
-                }
 
-                return affected;
+            if (affected)
+            {
+                ClearStatus();
+                _status = status;
+                _status.OnStatusEnded += RemoveStatus;
             }
+            else if (FireWaterPercentage == 0)
+            {
+                ClearStatus();
+                _status = null;
+            }
+
+            return affected || negating;
         }
 
         private void ClearStatus()

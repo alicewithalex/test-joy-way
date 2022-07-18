@@ -46,6 +46,7 @@ namespace alicewithalex.Data
             if (_delay <= 0 || _duration <= 0)
             {
                 _delay = _duration = 0f;
+                _ended = true;
             }
         }
 
@@ -80,7 +81,7 @@ namespace alicewithalex.Data
         {
             if (status is null) return false;
 
-            return status.Type.Equals(Negate) || Type.Equals(status.Negate);
+            return Type.Equals(status.Negate);
         }
 
         public float Modify(float damage)
