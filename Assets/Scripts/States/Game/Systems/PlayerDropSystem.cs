@@ -1,4 +1,5 @@
 using alicewithalex.Data;
+using DG.Tweening;
 using NoName.Injection;
 using NoName.Systems;
 
@@ -20,6 +21,8 @@ namespace alicewithalex.Systems
                 if (pickable != null)
                 {
                     pickable.Transform.position = _stateData.Player.Transform.position + _stateData.Player.Transform.forward;
+                    pickable.Transform.DOMove(_stateData.Player.Transform.position + _stateData.Player.Transform.forward * 2f, 1f)
+                        .SetEase(Ease.OutQuad);
                     pickable.Show();
                 }
             }
@@ -31,6 +34,8 @@ namespace alicewithalex.Systems
                 if (pickable != null)
                 {
                     pickable.Transform.position = _stateData.Player.Transform.position + _stateData.Player.Transform.forward;
+                    pickable.Transform.DOMove(_stateData.Player.Transform.position + _stateData.Player.Transform.forward * 2f, 1f)
+                        .SetEase(Ease.OutQuad);
                     pickable.Show();
                 }
             }
