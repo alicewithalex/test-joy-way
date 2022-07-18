@@ -11,7 +11,7 @@ namespace alicewithalex.Data
         }
 
         public override StatusType Type => StatusType.Wet;
-        public override StatusType Negate => StatusType.OnFire;
+        public override StatusType Negate => StatusType.None;
 
         public override int Sign => -1;
 

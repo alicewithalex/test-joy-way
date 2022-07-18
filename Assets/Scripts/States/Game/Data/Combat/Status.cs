@@ -76,6 +76,13 @@ namespace alicewithalex.Data
 
         public abstract bool IsAffected(float value);
 
+        public bool IsNegating(Status status)
+        {
+            if (status is null) return false;
+
+            return status.Type.Equals(Negate) || Type.Equals(status.Negate);
+        }
+
         public float Modify(float damage)
         {
             foreach (var modifer in _damageModifiers)

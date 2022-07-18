@@ -71,20 +71,29 @@ namespace alicewithalex.Data
             FireWaterPercentage += status.Sign * status.Amount;
 
             var affected = status.IsAffected(FireWaterPercentage);
+            var negating = status.IsNegating(_status);
 
-            if (affected)
+            if (negating)
             {
                 ClearStatus();
-                _status = status;
-                _status.OnStatusEnded += RemoveStatus;
+                return false;
             }
-            else if (FireWaterPercentage == 0)
+            else
             {
-                ClearStatus();
-                _status = null;
-            }
+                if (affected)
+                {
+                    ClearStatus();
+                    _status = status;
+                    _status.OnStatusEnded += RemoveStatus;
+                }
+                else if (FireWaterPercentage == 0)
+                {
+                    ClearStatus();
+                    _status = null;
+                }
 
-            return affected;
+                return affected;
+            }
         }
 
         private void ClearStatus()
