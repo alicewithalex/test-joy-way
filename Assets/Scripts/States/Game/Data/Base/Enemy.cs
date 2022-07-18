@@ -63,8 +63,6 @@ namespace alicewithalex.Data
             if (_status != null && modifiable)
                 amount = _status.Modify(amount);
 
-            Debug.Log(amount);
-
             Health -= amount;
         }
 
