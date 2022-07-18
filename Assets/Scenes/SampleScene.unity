@@ -2892,6 +2892,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2071097685}
     m_Modifications:
+    - target: {fileID: 368005002191148408, guid: 6327337775b65b245a784e1eb3860b78, type: 3}
+      propertyPath: _damagePercentage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225630512411599087, guid: 6327337775b65b245a784e1eb3860b78, type: 3}
+      propertyPath: _damagePercentage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4006414733821790070, guid: 6327337775b65b245a784e1eb3860b78, type: 3}
       propertyPath: m_Name
       value: Dummy
@@ -2939,6 +2947,10 @@ PrefabInstance:
     - target: {fileID: 4006414733821790071, guid: 6327337775b65b245a784e1eb3860b78, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8729641205031120997, guid: 6327337775b65b245a784e1eb3860b78, type: 3}
+      propertyPath: _damagePercentage
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6327337775b65b245a784e1eb3860b78, type: 3}
