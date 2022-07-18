@@ -7,6 +7,7 @@ namespace alicewithalex.Configs
     {
         public Rigidbody Prefab;
         public LayerMask Layer;
+        public bool Modifiable = false;
 
         [Space(4)]
         [Min(0)] public float Damage = 10;

@@ -10,6 +10,8 @@ namespace alicewithalex
         {
             systems
 
+                .Add(new Systems.ResetSystem<GameStateData>(UnityEngine.KeyCode.R))
+
                 .Add(new Systems.GameStateInitializeSystem())
 
                 .Add(new Systems.PlayerCameraSystem())

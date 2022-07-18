@@ -1,5 +1,6 @@
 using alicewithalex.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace alicewithalex.Data
 {
@@ -10,6 +11,8 @@ namespace alicewithalex.Data
         public abstract int Sign { get; }
 
         public readonly IDamagable Target;
+
+        private readonly List<DamageModifier> _damageModifiers;
 
         private readonly float _amount;
         private readonly float _damage;
@@ -23,16 +26,21 @@ namespace alicewithalex.Data
 
         public float Amount => _amount;
 
-        public Status(IDamagable target, float amount, float damage, int ticks = 3, float lifeTime = 2.0f)
+        public Status(IDamagable target, List<DamageModifier> damageModifiers,
+            float amount, float damage, int ticks = 3, float lifeTime = 2.0f)
         {
             Target = target;
 
             _amount = amount;
             _damage = damage;
             _duration = lifeTime;
+            _damageModifiers = damageModifiers;
 
             if (ticks > 0)
+            {
                 _delay = lifeTime / ticks;
+                _tick = _delay;
+            }
             else _delay = 0f;
 
             if (_delay <= 0 || _duration <= 0)
@@ -62,11 +70,20 @@ namespace alicewithalex.Data
             if (_tick <= 0)
             {
                 _tick = _delay;
-
                 Target.Damage(_damage);
             }
         }
 
         public abstract bool IsAffected(float value);
+
+        public float Modify(float damage)
+        {
+            foreach (var modifer in _damageModifiers)
+            {
+                damage = modifer.Modify(damage);
+            }
+
+            return damage;
+        }
     }
 }

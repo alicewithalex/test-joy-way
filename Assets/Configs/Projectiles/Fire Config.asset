@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5ff3e5b736eb1c4da2872c1d8229fa5, type: 3}
-  m_Name: Bullet Config
+  m_Name: Fire Config
   m_EditorClassIdentifier: 
   Prefab: {fileID: 3377850808547518909, guid: d2cb432a672e70042a9ca17a4bac83ab, type: 3}
   Layer:
     serializedVersion: 2
     m_Bits: 1073741824
-  Modifiable: 1
-  Damage: 10
-  Mass: 1
-  Force: 25
-  ForceMode: 1
-  DestroyDelay: 5
+  Damage: 1
+  Mass: 0
+  Force: 0
+  ForceMode: 0
+  DestroyDelay: 0

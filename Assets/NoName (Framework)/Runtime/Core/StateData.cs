@@ -1,5 +1,6 @@
 using NoName.Factory;
 using NoName.Injection;
+using NoName.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace NoName.Data
         public IFactory Factory => _factory;
 
         private readonly Dictionary<Type, HashSet<object>> _trash;
+
+        public readonly List<IResetable> Resetables = new List<IResetable>();
 
         protected StateData()
         {

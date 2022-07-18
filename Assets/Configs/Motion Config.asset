@@ -10,12 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c546598ac2f24a459e8c93986861267, type: 3}
-  m_Name: Locomotion Config
+  m_Name: Motion Config
   m_EditorClassIdentifier: 
   MovementSpeed: 6.5
-  MovementSmoothness: 12.9
+  MovementSmoothness: 12.5
   Gravity: 9.81
-  JumpForce: 2.5
-  MouseSensitivity: 1.5
-  MinPitch: -116
-  MaxPitch: 95
+  JumpForce: 2.25

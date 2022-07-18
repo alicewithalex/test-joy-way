@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace alicewithalex.Data
 {
@@ -30,11 +31,11 @@ namespace alicewithalex.Data
             return hand.Release();
         }
 
-        public void UseItem(HandType handType)
+        public void UseItem(HandType handType,KeyCode key)
         {
             if (!IsHolding(handType)) return;
 
-            _hands[handType].Use();
+            _hands[handType].Use(key);
         }
     }
 }

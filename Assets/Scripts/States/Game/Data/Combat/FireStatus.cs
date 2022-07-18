@@ -1,10 +1,12 @@
 using alicewithalex.Interfaces;
+using System.Collections.Generic;
 
 namespace alicewithalex.Data
 {
     public class FireStatus : Status
     {
-        public FireStatus(IDamagable target, float amount, float damage, int ticks = 3, float lifeTime = 2) : base(target, amount, damage, ticks, lifeTime)
+        public FireStatus(IDamagable target, List<DamageModifier> damageModifiers,
+            float amount, float damage, int ticks = 3, float lifeTime = 2) : base(target, damageModifiers, amount, damage, ticks, lifeTime)
         {
         }
 

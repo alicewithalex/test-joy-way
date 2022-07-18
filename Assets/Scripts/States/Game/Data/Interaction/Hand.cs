@@ -35,11 +35,11 @@ namespace alicewithalex.Data
                 item.Disarm();
         }
 
-        public void Use()
+        public void Use(KeyCode key)
         {
             if (!_current) return;
 
-            _current.Interact();
+            _current.Interact(key);
         }
 
         public void Grab(Pickup pickup)

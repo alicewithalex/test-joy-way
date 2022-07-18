@@ -22,8 +22,5 @@ namespace alicewithalex.Data
         public bool RightHandReleased => Input.GetKeyUp(_inputConfig.RightHandGrab);
 
         public bool JumpPressed => Input.GetKeyDown(_inputConfig.Jump);
-
-        public bool LeftHandShoot => Input.GetKeyDown(_inputConfig.LeftHandShoot);
-        public bool RightHandShoot => Input.GetKeyDown(_inputConfig.RightHandShoot);
     }
 }

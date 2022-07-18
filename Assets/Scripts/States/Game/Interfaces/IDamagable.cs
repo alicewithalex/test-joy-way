@@ -4,7 +4,7 @@ namespace alicewithalex.Interfaces
 {
     public interface IDamagable
     {
-        void Damage(float amount);
+        void Damage(float amount, bool modifiable = false);
 
         bool Refresh(Status status);
     }

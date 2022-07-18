@@ -205,7 +205,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4006414733239378970}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.30650765, y: 0.7970294, z: 0.3313948}
@@ -263,7 +263,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4006414733241977416}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.15882027
@@ -321,7 +321,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4006414733304641460}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.36389267, y: 0.21470284, z: 0.18006572}
@@ -461,6 +461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4006414733821790071}
   - component: {fileID: 1887212913988588778}
+  - component: {fileID: 1081944260292821982}
   m_Layer: 0
   m_Name: Dummy
   m_TagString: Untagged
@@ -507,7 +508,32 @@ MonoBehaviour:
   - {fileID: 1225630512411599087}
   _onFireWaterPercentageChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5084535468780655293}
+        m_TargetAssemblyTypeName: alicewithalex.Data.MarkedBar, Assembly-CSharp
+        m_MethodName: OnValueChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1081944260292821982}
+        m_TargetAssemblyTypeName: alicewithalex.Listeners.MaterialColorEvaluator,
+          Assembly-CSharp
+        m_MethodName: OnValueChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onHealthChanged:
     m_PersistentCalls:
       m_Calls:
@@ -523,6 +549,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1081944260292821982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4006414733821790070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00e61dbede074114a88320e1d00e31de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 4006414733544115049}
+  _propertyName: _Color
+  _color1: {r: 0, g: 0.7035656, b: 1, a: 1}
+  _color2: {r: 1, g: 0.19215688, b: 0, a: 1}
 --- !u!1 &4006414734109945370
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +605,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4006414734109945370}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.36389267, y: 0.21470284, z: 0.18007389}
@@ -627,6 +669,7 @@ GameObject:
   - component: {fileID: 8986330614360756865}
   - component: {fileID: 2755072632454210458}
   - component: {fileID: 95218261023991536}
+  - component: {fileID: 5084535468780655293}
   m_Layer: 0
   m_Name: Fire and Wet Bar
   m_TagString: Untagged
@@ -716,6 +759,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5084535468780655293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4799432883548788733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feda37159782a75488069e7b3433f75e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _marker: {fileID: 3914950194271015943}
+  _min: -0.6
+  _max: 0.6
 --- !u!1 &5275088990403558636
 GameObject:
   m_ObjectHideFlags: 0

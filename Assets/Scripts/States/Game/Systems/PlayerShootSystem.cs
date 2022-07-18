@@ -12,11 +12,8 @@ namespace alicewithalex.Systems
         {
             if (_data.Player is null) return;
 
-            if (_data.Input.LeftHandShoot)
-                _data.Inventory.UseItem(HandType.Left);
-
-            if (_data.Input.RightHandShoot)
-                _data.Inventory.UseItem(HandType.Right);
+            _data.Inventory.UseItem(HandType.Left, _data.InputConfig.LeftHandShoot);
+            _data.Inventory.UseItem(HandType.Right, _data.InputConfig.RightHandShoot);
         }
     }
 

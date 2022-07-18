@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 namespace alicewithalex.Data
 {
-    public class Enemy : StateDataReciever<GameStateData>, IDamagable
+    public class Enemy : StateDataReciever<GameStateData>, IDamagable, IResetable
     {
         [SerializeField, Min(0)] private float _health = 1000f;
         [SerializeField] private List<HitBox> _hitBoxes = new List<HitBox>();
@@ -26,10 +26,9 @@ namespace alicewithalex.Data
             {
                 _fireWaterPercentage = Mathf.Clamp(value, -100f, 100f);
 
-                _onFireWaterPercentageChanged?.Invoke((_fireWaterPercentage + 100) * 0.01f);
+                _onFireWaterPercentageChanged?.Invoke(Mathf.InverseLerp(-100f, 100f, _fireWaterPercentage));
             }
         }
-
         private float Health
         {
             get => _currentHealth;
@@ -42,7 +41,6 @@ namespace alicewithalex.Data
             }
         }
 
-        private StatusType _statusType;
         private Status _status;
 
         public event Action<Status> OnStatusStopped;
@@ -51,48 +49,59 @@ namespace alicewithalex.Data
         {
             base.OnInitialize();
 
-            Health = _maxHealth = _health;
+            OnReset();
 
             foreach (var hitbox in _hitBoxes)
                 hitbox.Link(this);
 
             Data.Enemy = this;
+            Data.Resetables.Add(this);
         }
 
-        public void Damage(float amount)
+        public void Damage(float amount, bool modifiable = false)
         {
-            Health -= amount;
+            if (_status != null && modifiable)
+                amount = _status.Modify(amount);
 
-            float percentage = _maxHealth == 0 ? 0 : _currentHealth / _maxHealth;
-            _onHealthChanged?.Invoke(percentage);
+            Health -= amount;
         }
 
         public bool Refresh(Status status)
         {
-            if (_statusType.Equals(status.Negate))
-            {
-                FireWaterPercentage += status.Sign * status.Amount;
-            }
+            FireWaterPercentage += status.Sign * status.Amount;
 
-            bool affected = status.IsAffected(FireWaterPercentage);
+            var affected = status.IsAffected(FireWaterPercentage);
 
             if (affected)
             {
-                _statusType = status.Type;
-
-                if (_status != null)
-                    OnStatusStopped?.Invoke(_status);
-
+                ClearStatus();
                 _status = status;
+                _status.OnStatusEnded += RemoveStatus;
             }
-            else
+            else if (FireWaterPercentage == 0)
             {
-                _statusType = StatusType.None;
+                ClearStatus();
                 _status = null;
             }
 
             return affected;
         }
 
+        private void ClearStatus()
+        {
+            if (_status is null) return;
+
+            OnStatusStopped?.Invoke(_status);
+        }
+
+        private void RemoveStatus(Status status) => _status = null;
+
+        public void OnReset()
+        {
+            Health = _maxHealth = _health;
+            FireWaterPercentage = 0f;
+
+            ClearStatus();
+        }
     }
 }

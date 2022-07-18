@@ -6,6 +6,7 @@ namespace alicewithalex.Data
     public abstract class Item : StateDataReciever<GameStateData>
     {
         [SerializeField] private ItemType _itemType;
+        [SerializeField] private KeyUsage _keyUsage;
 
         private Hand _hand;
 
@@ -25,6 +26,23 @@ namespace alicewithalex.Data
 
         protected void Toggle(bool value) => gameObject.SetActive(value);
 
-        public abstract void Interact();
+        public abstract void Interact(KeyCode key);
+
+        public bool IsUsing(KeyCode key)
+        {
+            switch (_keyUsage)
+            {
+                default:
+                case KeyUsage.None:
+                    return false;
+                case KeyUsage.Pressed:
+                    return Input.GetKeyDown(key);
+                case KeyUsage.Held:
+                    return Input.GetKey(key);
+                case KeyUsage.Released:
+                    return Input.GetKeyUp(key);
+
+            }
+        }
     }
 }

@@ -28,4 +28,31 @@ namespace NoName.Signals
             _callback?.Invoke();
         }
     }
+
+    public class Signal<T> : AbstractSignal
+    {
+        private Action<T> _callback;
+
+        public void AddListener(Action<T> callback)
+        {
+#if UNITY_EDITOR
+            UnityEngine.Debug.Assert(callback.Method.GetCustomAttributes(typeof(
+                System.Runtime.CompilerServices.CompilerGeneratedAttribute), inherit: false).Length == 0,
+                "Adding anonymous delegates as Signal callbacks is not supported " +
+                "(you wouldn't be able to unregister them later).");
+#endif
+
+            _callback += callback;
+        }
+
+        public void RemoveListener(Action<T> callback)
+        {
+            _callback -= callback;
+        }
+
+        public void Dispatch(T value)
+        {
+            _callback?.Invoke(value);
+        }
+    }
 }

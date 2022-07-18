@@ -17,3 +17,6 @@ MonoBehaviour:
   Amount: 10
   Damage: 0
   Ticks: 0
+  DamageModifiers:
+  - _type: 0
+    _value: -10
