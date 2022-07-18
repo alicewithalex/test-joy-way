@@ -11,6 +11,9 @@ namespace NoName.Enums
 {
     public class Bootstrap : MonoBehaviour
     {
+        [SerializeField] private CursorLockMode _cursorLockMode;
+        [SerializeField] private bool _cursorVisible;
+
         [Space(8)]
         [SerializeField] private State _initialState;
 
@@ -116,6 +119,9 @@ namespace NoName.Enums
 
         private void Awake()
         {
+            Cursor.lockState = _cursorLockMode;
+            Cursor.visible = _cursorVisible;
+
             _monoContainer.Initialize();
 
             SetupStateMachine();

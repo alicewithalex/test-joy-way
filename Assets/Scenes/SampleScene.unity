@@ -1787,6 +1787,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea20a0f0c75cfea439e7b313d1f6b459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cursorLockMode: 2
+  _cursorVisible: 1
   _initialState: 1
   _onStateEnter:
     m_PersistentCalls:
