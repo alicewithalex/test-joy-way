@@ -42,7 +42,7 @@ namespace alicewithalex.Data
             }
 
             _items[slotType].Pickable = pickable;
-            _items[slotType].Show();
+            _items[slotType].Transform.gameObject.SetActive(true);
 
             return true;
         }
@@ -53,7 +53,7 @@ namespace alicewithalex.Data
 
             var pickable = _items[slotType].Pickable;
             _items[slotType].Pickable = null;
-            _items[slotType].Hide();
+            _items[slotType].Transform.gameObject.SetActive(false);
             _items.Remove(slotType);
 
             return pickable;

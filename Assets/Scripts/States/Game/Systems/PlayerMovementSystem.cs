@@ -13,7 +13,14 @@ namespace alicewithalex.Systems
         {
             if (_stateData.Player is null) return;
 
-            _stateData.Player.AddMovement(_stateData.Input.Movement.normalized, Time.deltaTime);
+            var direction = _stateData.Input.Movement.normalized;
+
+            _stateData.Player.CurrentSpeed = Mathf.Lerp(_stateData.Player.CurrentSpeed,
+                direction.magnitude * _stateData.MovementConfig.MovementSpeed,
+               _stateData.MovementConfig.MovementSmoothness * Time.deltaTime);
+
+            _stateData.Player.Velocity = _stateData.Player.Transform.TransformDirection(
+                new Vector3(direction.x, 0f, direction.y)) * _stateData.Player.CurrentSpeed;
         }
     }
 }

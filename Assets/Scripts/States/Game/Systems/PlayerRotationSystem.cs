@@ -1,6 +1,7 @@
 using alicewithalex.Data;
 using NoName.Injection;
 using NoName.Systems;
+using UnityEngine;
 
 namespace alicewithalex.Systems
 {
@@ -12,8 +13,14 @@ namespace alicewithalex.Systems
         {
             if (_stateData.Player is null) return;
 
-            _stateData.Player.AddRotation(_stateData.Input.Look, _stateData.MouseConfig.MouseSensitivity,
-                _stateData.MouseConfig.MinPitch, _stateData.MouseConfig.MaxPitch);
+            var player = _stateData.Player;
+
+            player.xRot -= _stateData.Input.Look.x * _stateData.MouseConfig.MouseSensitivity;
+            player.yRot += _stateData.Input.Look.y * _stateData.MouseConfig.MouseSensitivity;
+
+            player.xRot = Mathf.Clamp(player.xRot, _stateData.MouseConfig.MinPitch, _stateData.MouseConfig.MaxPitch);
+
+            player.Transform.localEulerAngles = new Vector3(0f, player.yRot, 0f);
         }
     }
 }

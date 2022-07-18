@@ -11,23 +11,23 @@ namespace alicewithalex.Systems
 
         public void StateUpdate()
         {
-            if (_stateData.Player is null || _stateData.Player.LookAt == null) return;
+            if (_stateData.Player is null || _stateData.Player.LookingAt == null) return;
 
             if (_stateData.Input.LeftHandPressed)
             {
-                if (_stateData.Inventory.Add(SlotType.LeftHand, _stateData.Player.LookAt))
+                if (_stateData.Inventory.Add(SlotType.LeftHand, _stateData.Player.LookingAt))
                 {
-                    _stateData.Player.LookAt.Hide();
-                    _stateData.Player.LookAt = null;
+                    _stateData.Player.LookingAt.Hide();
+                    _stateData.Player.LookingAt = null;
                 }
             }
 
             if (_stateData.Input.RightHandPressed)
             {
-                if (_stateData.Inventory.Add(SlotType.RightHand, _stateData.Player.LookAt))
+                if (_stateData.Inventory.Add(SlotType.RightHand, _stateData.Player.LookingAt))
                 {
-                    _stateData.Player.LookAt.Hide();
-                    _stateData.Player.LookAt = null;
+                    _stateData.Player.LookingAt.Hide();
+                    _stateData.Player.LookingAt = null;
                 }
             }
         }

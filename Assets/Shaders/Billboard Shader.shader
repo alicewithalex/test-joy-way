@@ -1,72 +1,126 @@
-Shader "Custom/Billboard"
+// Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
+// Added billboard feature
+Shader "UI/Default"
 {
-	//Was found on: https://en.wikibooks.org/wiki/Cg_Programming/Unity/Billboards
-
 	Properties
 	{
-	   _MainTex("Texture Image", 2D) = "white" {}
-	   _ScaleX("Scale X", Float) = 1.0
-	   _ScaleY("Scale Y", Float) = 1.0
+		[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
+		_Color("Tint", Color) = (1,1,1,1)
+
+		_ScaleX("Scale X", Float) = 1.0
+		_ScaleY("Scale Y", Float) = 1.0
+
+		_StencilComp("Stencil Comparison", Float) = 8
+		_Stencil("Stencil ID", Float) = 0
+		_StencilOp("Stencil Operation", Float) = 0
+		_StencilWriteMask("Stencil Write Mask", Float) = 255
+		_StencilReadMask("Stencil Read Mask", Float) = 255
+
+		_ColorMask("Color Mask", Float) = 15
+
+		[Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip("Use Alpha Clip", Float) = 0
 	}
 
-
 		SubShader
-	   {
+		{
+			Tags
+			{
+				"Queue" = "Transparent"
+				"IgnoreProjector" = "True"
+				"RenderType" = "Transparent"
+				"PreviewType" = "Plane"
+				"CanUseSpriteAtlas" = "True"
+			}
 
-			Tags {"Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent"}
+			Stencil
+			{
+				Ref[_Stencil]
+				Comp[_StencilComp]
+				Pass[_StencilOp]
+				ReadMask[_StencilReadMask]
+				WriteMask[_StencilWriteMask]
+			}
 
-			ZWrite Off
-			ZTest Always
-			Lighting Off
 			Cull Off
-			Fog { Mode Off }
-
+			Lighting Off
+			ZWrite Off
+			ZTest[unity_GUIZTestMode]
 			Blend SrcAlpha OneMinusSrcAlpha
+			ColorMask[_ColorMask]
 
-		   Pass
-		   {
-			  CGPROGRAM
+			Pass
+			{
+				Name "Default"
+			CGPROGRAM
+				#pragma vertex vert
+				#pragma fragment frag
+				#pragma target 2.0
 
-			  #pragma vertex vert  
-			  #pragma fragment frag
+				#include "UnityCG.cginc"
+				#include "UnityUI.cginc"
 
-			  // User-specified uniforms            
-			  uniform sampler2D _MainTex;
-			  uniform float _ScaleX;
-			  uniform float _ScaleY;
+				#pragma multi_compile_local _ UNITY_UI_CLIP_RECT
+				#pragma multi_compile_local _ UNITY_UI_ALPHACLIP
 
-			  struct vertexInput
-			  {
-				 float4 vertex : POSITION;
-				 float4 tex : TEXCOORD0;
-			  };
+				struct appdata_t
+				{
+					float4 vertex   : POSITION;
+					float4 color    : COLOR;
+					float2 texcoord : TEXCOORD0;
+					UNITY_VERTEX_INPUT_INSTANCE_ID
+				};
 
-			  struct vertexOutput
-			  {
-				 float4 pos : SV_POSITION;
-				 float4 tex : TEXCOORD0;
-			  };
+				struct v2f
+				{
+					float4 vertex   : SV_POSITION;
+					fixed4 color : COLOR;
+					float2 texcoord  : TEXCOORD0;
+					float4 worldPosition : TEXCOORD1;
+					UNITY_VERTEX_OUTPUT_STEREO
+				};
 
-			  vertexOutput vert(vertexInput input)
-			  {
-				 vertexOutput output;
+				sampler2D _MainTex;
+				fixed4 _Color;
+				fixed4 _TextureSampleAdd;
+				float4 _ClipRect;
+				float4 _MainTex_ST;
 
-				 output.pos = mul(UNITY_MATRIX_P,
-				   mul(UNITY_MATRIX_MV, float4(0.0, 0.0, 0.0, 1.0))
-				   + float4(input.vertex.x, input.vertex.y, 0.0, 0.0)
-				   * float4(_ScaleX, _ScaleY, 1.0, 1.0));
+				half _ScaleX;
+				half _ScaleY;
 
-				 output.tex = input.tex;
+				v2f vert(appdata_t v)
+				{
+					v2f OUT;
+					UNITY_SETUP_INSTANCE_ID(v);
+					UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
+					OUT.worldPosition = v.vertex;
 
-				 return output;
-			  }
+					OUT.vertex = mul(UNITY_MATRIX_P,
+						mul(UNITY_MATRIX_MV, float4(0.0, 0.0, 0.0, 1.0))
+						+ float4(v.vertex.x, v.vertex.y, 0.0, 0.0)
+						* float4(_ScaleX, _ScaleY, 1.0, 1.0));
 
-			  float4 frag(vertexOutput input) : COLOR
-			  {
-				 return tex2D(_MainTex, float2(input.tex.xy));
-			  }
+					OUT.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
 
-			  ENDCG
-		   }
-	   }
+					OUT.color = v.color * _Color;
+					return OUT;
+				}
+
+				fixed4 frag(v2f IN) : SV_Target
+				{
+					half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color;
+
+					#ifdef UNITY_UI_CLIP_RECT
+					color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
+					#endif
+
+					#ifdef UNITY_UI_ALPHACLIP
+					clip(color.a - 0.001);
+					#endif
+
+					return color;
+				}
+			ENDCG
+			}
+		}
 }

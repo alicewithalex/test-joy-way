@@ -13,16 +13,17 @@ namespace alicewithalex.Systems
         {
             if (_stateData.Player is null) return;
 
-            if (Physics.Raycast(_stateData.Player.LookRay, out var hit, _stateData.PickupConfig.PickupDistance,
+            if (Physics.Raycast(new Ray(_stateData.Camera.transform.position,_stateData.Camera.transform.forward),
+                out var hit, _stateData.PickupConfig.PickupDistance,
                 _stateData.PickupConfig.PickupLayer, QueryTriggerInteraction.Collide))
             {
-                _stateData.Player.LookAt = _stateData.Pickables[hit.transform];
+                _stateData.Player.LookingAt = _stateData.Pickables[hit.transform];
             }
             else
             {
-                if (_stateData.Player.LookAt != null)
+                if (_stateData.Player.LookingAt != null)
                 {
-                    _stateData.Player.LookAt = null;
+                    _stateData.Player.LookingAt = null;
                 }
             }
         }
