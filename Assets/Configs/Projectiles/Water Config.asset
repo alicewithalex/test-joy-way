@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5ff3e5b736eb1c4da2872c1d8229fa5, type: 3}
+  m_Name: Water Config
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 6335990406913598369, guid: 926adb205350dbe4ba001e25a058a8d9, type: 3}
+  Layer:
+    serializedVersion: 2
+    m_Bits: 1073741824
+  Damage: 0
+  Mass: 1
+  Force: 25
+  ForceMode: 1
+  DestroyDelay: 10

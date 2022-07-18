@@ -1,4 +1,4 @@
-namespace NoName.StateMachine
+namespace NoName.Enums
 {
     public enum StateTransition
     {

@@ -2,7 +2,7 @@ using NoName.Debugging;
 using System;
 using UnityEngine;
 
-namespace NoName.StateMachine
+namespace NoName.Enums
 {
     public class StateMachine : IStateMachine
     {

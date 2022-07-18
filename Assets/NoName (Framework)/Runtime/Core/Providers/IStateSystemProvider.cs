@@ -1,6 +1,8 @@
-using NoName.Systems;
 
-public interface IStateSystemProvider
+namespace NoName.Interfaces
 {
-    StateSystems GetStateSystems(IContainer container);
+    public interface IStateSystemProvider
+    {
+        Systems.StateSystems GetStateSystems(IContainer container);
+    }
 }

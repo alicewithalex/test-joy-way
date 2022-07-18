@@ -1,4 +1,4 @@
-using NoName.StateMachine;
+using NoName.Enums;
 using UnityEngine;
 
 namespace NoName.UI

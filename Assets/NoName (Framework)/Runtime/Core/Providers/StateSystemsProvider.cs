@@ -1,9 +1,8 @@
-using NoName.StateMachine;
-using NoName.Systems;
-using UnityEngine;
 
-public abstract class StateSystemsProvider : MonoBehaviour, IStateSystemProvider
+namespace NoName.Providers
 {
-    public abstract State State { get; }
-    public abstract StateSystems GetStateSystems(IContainer container);
+    public abstract class StateSystemsProvider<T> : AbstractStateSystemsProvider where T : Data.StateData
+    {
+        public override System.Type DataType => typeof(T);
+    }
 }

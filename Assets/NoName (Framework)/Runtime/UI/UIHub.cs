@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NoName.Debugging;
 using NoName.EditorExtended;
-using NoName.StateMachine;
+using NoName.Enums;
 using UnityEngine;
 
 namespace NoName.UI

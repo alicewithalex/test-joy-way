@@ -1,40 +1,24 @@
 using alicewithalex.Configs;
 using alicewithalex.Data;
-using NoName.Data;
-using NoName.Injection;
-using NoName.StateMachine;
+using NoName.Providers;
 using UnityEngine;
 
-namespace alicewithalex.Providers
+namespace alicewithalex
 {
-    public class GameStateDataProvider : StateDataProvider
+    public class GameStateDataProvider : StateDataProvider<GameStateData>
     {
-        [Header("Core")]
-        [SerializeField] private Camera _camera;
-
         [Header("Configs")]
         [SerializeField] private InputConfig _inputConfig;
         [SerializeField] private MouseConfig _mouseConfig;
-        [SerializeField] private MovementConfig _movementConfig;
-        [SerializeField] private PickupConfig _pickupConfig;
+        [SerializeField] private MotionConfig _movementConfig;
+        [SerializeField] private InteractionConfig _pickupConfig;
 
-        public override State State => State.Game;
-
-        public override StateData GetData(IContainer container)
+        protected override void Process(GameStateData stateData, IContainer container)
         {
-
-            var data = new GameStateData();
-
-
-            data.Camera = _camera;
-
-            data.Input = new GameInput(_inputConfig);
-            data.InputConfig = _inputConfig;
-            data.MouseConfig = _mouseConfig;
-            data.MovementConfig = _movementConfig;
-            data.PickupConfig = _pickupConfig;
-
-            return data;
+            stateData.InputConfig = _inputConfig;
+            stateData.MouseConfig = _mouseConfig;
+            stateData.MovementConfig = _movementConfig;
+            stateData.InteractionConfig = _pickupConfig;
         }
     }
 }

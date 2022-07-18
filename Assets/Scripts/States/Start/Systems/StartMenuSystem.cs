@@ -1,7 +1,7 @@
 using alicewithalex.Data;
 using alicewithalex.UI;
 using NoName.Injection;
-using NoName.StateMachine;
+using NoName.Enums;
 using NoName.Systems;
 using NoName.UI;
 using UnityEngine;

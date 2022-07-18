@@ -1,16 +1,12 @@
 using alicewithalex.Data;
-using NoName.Data;
-using NoName.StateMachine;
+using NoName.Providers;
 
 namespace alicewithalex.Providers
 {
-    public class StartStateDataProvider : StateDataProvider
+    public class StartStateDataProvider : StateDataProvider<StartStateData>
     {
-        public override State State => State.Start;
-
-        public override StateData GetData(IContainer container)
+        protected override void Process(StartStateData stateData, IContainer container)
         {
-            return new StartStateData();
         }
     }
 }

@@ -1,32 +1,34 @@
-using NoName.StateMachine;
+using alicewithalex.Data;
+using NoName.Providers;
 using NoName.Systems;
 
-namespace alicewithalex.Providers
+namespace alicewithalex
 {
-    public class GameSystemsProvider : StateSystemsProvider
+    public class GameSystemsProvider : StateSystemsProvider<GameStateData>
     {
-        public override State State => State.Game;
-
-        public override StateSystems GetStateSystems(IContainer container)
+        protected override void Process(StateSystems systems, IContainer container)
         {
-            var systems = new StateSystems();
-
             systems
 
-                .Add(new Systems.InventorySystem())
+                .Add(new Systems.GameStateInitializeSystem())
 
-                .Add(new Systems.PlayerRotationSystem())
-                .Add(new Systems.PlayerGravitationSystem())
-                .Add(new Systems.PlayerMovementSystem())
-                .Add(new Systems.PlayerEvaluateSystem())
+                .Add(new Systems.PlayerCameraSystem())
+                .Add(new Systems.PlayerMotionSystem())
+                .Add(new Systems.PlayerSearchSystem())
 
-                .Add(new Systems.PlayerItemTargetSystem())
-                .Add(new Systems.PlayerPickupSystem())
+                .Add(new Systems.PlayerInteractionSystem())
                 .Add(new Systems.PlayerDropSystem())
 
-                ;
+                .Add(new Systems.PlayerShootSystem())
+                .Add(new Systems.ProjectileMovementSystem())
+                .Add(new Systems.StatusesEvaluationSystem())
 
-            return systems;
+                .Add(new Systems.ProjectileCleanupSystem())
+                .Add(new Systems.StatusesCleanupSystem())
+
+                .Add(new Systems.StateDataCleanupSystem<GameStateData>())
+
+                ;
         }
     }
 }

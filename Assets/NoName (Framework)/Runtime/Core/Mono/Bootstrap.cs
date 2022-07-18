@@ -1,5 +1,5 @@
 using NoName.Data;
-using NoName.EditorExtended;
+using NoName.Providers;
 using NoName.Systems;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace NoName.StateMachine
+namespace NoName.Enums
 {
     public class Bootstrap : MonoBehaviour
     {
@@ -21,8 +21,8 @@ namespace NoName.StateMachine
         [Space(16)]
         [SerializeField] private MonoContainer _monoContainer;
         [Space(8)]
-        [SerializeField] private List<StateSystemsProvider> _stateSystemsProviders;
-        [SerializeField] private List<StateDataProvider> _stateDataProviders;
+        [SerializeField] private List<AbstractStateSystemsProvider> _stateSystemsProviders;
+        [SerializeField] private List<AbstractStateDataProvider> _stateDataProviders;
 
         private StateMachine _stateMachine;
 
@@ -75,23 +75,23 @@ namespace NoName.StateMachine
                     _systems[provider.State].Join(provider.GetStateSystems(_monoContainer.Container));
                 }
 
-                if (_data.TryGetValue(provider.State, out var data))
-                {
-                    // State data
-                    _systems[provider.State].Inject(data, data.GetType());
+                // State Machine
+                _systems[provider.State].Inject(_stateMachine, typeof(IStateMachine));
 
-                    // State Machine
-                    _systems[provider.State].Inject(_stateMachine, typeof(IStateMachine));
-                }
+                // State data
+                if (_data.TryGetValue(provider.State, out var data))
+                    _systems[provider.State].Inject(data, data.GetType());
             }
         }
 
         private void SetupViews()
         {
-            foreach (var view in FindObjectsOfType<AbstractViewComponent>())
+            Dictionary<Type, StateData> _dataMap = _data.Values.ToDictionary(x => x.GetType());
+
+            foreach (var receiver in FindObjectsOfType<AbstractStateDataReciever>(true))
             {
-                if (_data.ContainsKey(view.State))
-                    view.Process(_data[view.State]);
+                if (_dataMap.ContainsKey(receiver.Type))
+                    receiver.Receive(_dataMap[receiver.Type]);
             }
         }
 
@@ -153,11 +153,11 @@ namespace NoName.StateMachine
 
         #region Editor
 
-        [Button("Collect")]
+        [EditorExtended.Button("Collect")]
         private void Collect()
         {
-            _stateSystemsProviders = GetComponentsInChildren<StateSystemsProvider>().ToList();
-            _stateDataProviders = GetComponentsInChildren<StateDataProvider>().ToList();
+            _stateSystemsProviders = GetComponentsInChildren<AbstractStateSystemsProvider>().ToList();
+            _stateDataProviders = GetComponentsInChildren<AbstractStateDataProvider>().ToList();
             _monoContainer = FindObjectOfType<MonoContainer>();
 
 #if UNITY_EDITOR
@@ -167,6 +167,5 @@ namespace NoName.StateMachine
         }
 
         #endregion
-
     }
 }

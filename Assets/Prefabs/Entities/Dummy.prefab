@@ -175,9 +175,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4006414733239378971}
   - component: {fileID: 4006414733239378968}
-  - component: {fileID: 8126582071038457144}
-  - component: {fileID: 8594520121917627799}
-  m_Layer: 0
+  - component: {fileID: 3967842678081852321}
+  m_Layer: 30
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +210,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.30650765, y: 0.7970294, z: 0.3313948}
   m_Center: {x: 0, y: -0.056823432, z: 0.009928644}
---- !u!114 &8126582071038457144
+--- !u!114 &3967842678081852321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -220,25 +219,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4006414733239378970}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd122fbd6e8116f4da665d7d77a6f5e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fd80aea910df4649a0f400a53bd248b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &8594520121917627799
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4006414733239378970}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  _damagePercentage: 1
 --- !u!1 &4006414733241977416
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,9 +233,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4006414733241977417}
   - component: {fileID: 4006414733241977414}
-  - component: {fileID: 7385007234395111169}
-  - component: {fileID: 520096085893240570}
-  m_Layer: 0
+  - component: {fileID: 368005002191148408}
+  m_Layer: 30
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +268,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.15882027
   m_Center: {x: 0, y: -0.01906979, z: 0}
---- !u!114 &7385007234395111169
+--- !u!114 &368005002191148408
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -294,25 +277,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4006414733241977416}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd122fbd6e8116f4da665d7d77a6f5e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fd80aea910df4649a0f400a53bd248b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &520096085893240570
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4006414733241977416}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  _damagePercentage: 2
 --- !u!1 &4006414733304641460
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,9 +291,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4006414733304641461}
   - component: {fileID: 4006414733304641458}
-  - component: {fileID: 3838343332106741121}
-  - component: {fileID: 3393979227821544177}
-  m_Layer: 0
+  - component: {fileID: 1225630512411599087}
+  m_Layer: 30
   m_Name: Left Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +326,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.36389267, y: 0.21470284, z: 0.18006572}
   m_Center: {x: -0.0135912, y: 0.0046296716, z: -0.0008800477}
---- !u!114 &3838343332106741121
+--- !u!114 &1225630512411599087
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -368,25 +335,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4006414733304641460}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd122fbd6e8116f4da665d7d77a6f5e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fd80aea910df4649a0f400a53bd248b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &3393979227821544177
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4006414733304641460}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  _damagePercentage: 0.75
 --- !u!1 &4006414733329174558
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,7 +460,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4006414733821790071}
-  - component: {fileID: 8468307533234030698}
+  - component: {fileID: 1887212913988588778}
   m_Layer: 0
   m_Name: Dummy
   m_TagString: Untagged
@@ -535,7 +487,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8468307533234030698
+--- !u!114 &1887212913988588778
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -544,15 +496,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 4006414733821790070}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d3de0df97bdb2440ba248bb39d3c8e1, type: 3}
+  m_Script: {fileID: 11500000, guid: edef3b12419454d48abd2772ff828d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 1000
   _hitBoxes:
-  - {fileID: 7385007234395111169}
-  - {fileID: 8126582071038457144}
-  - {fileID: 3066536972447551677}
-  - {fileID: 3838343332106741121}
+  - {fileID: 368005002191148408}
+  - {fileID: 3967842678081852321}
+  - {fileID: 8729641205031120997}
+  - {fileID: 1225630512411599087}
+  _onFireWaterPercentageChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  _onHealthChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 71572621604830868}
+        m_TargetAssemblyTypeName: alicewithalex.Data.Healthbar, Assembly-CSharp
+        m_MethodName: OnHealthChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4006414734109945370
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,9 +533,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4006414734109945371}
   - component: {fileID: 4006414734109945368}
-  - component: {fileID: 3066536972447551677}
-  - component: {fileID: 5530109534614175031}
-  m_Layer: 0
+  - component: {fileID: 8729641205031120997}
+  m_Layer: 30
   m_Name: Right Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -599,7 +568,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.36389267, y: 0.21470284, z: 0.18007389}
   m_Center: {x: 0.0135912, y: 0.0046296716, z: -0.0017114915}
---- !u!114 &3066536972447551677
+--- !u!114 &8729641205031120997
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -608,25 +577,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4006414734109945370}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd122fbd6e8116f4da665d7d77a6f5e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fd80aea910df4649a0f400a53bd248b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &5530109534614175031
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4006414734109945370}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  _damagePercentage: 0.75
 --- !u!1 &4006414734604213069
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,6 +953,7 @@ GameObject:
   - component: {fileID: 6756929664490085486}
   - component: {fileID: 3672218090886566432}
   - component: {fileID: 5458506256034050046}
+  - component: {fileID: 71572621604830868}
   m_Layer: 0
   m_Name: Health Bar
   m_TagString: Untagged
@@ -1088,6 +1043,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &71572621604830868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8975413014523136863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a616790c41c43734bb2b709b4b2929c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fillImage: {fileID: 3788919060536555634}
 --- !u!1 &9141574266351622699
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 using NoName.Data;
 using NoName.Injection;
-using NoName.StateMachine;
+using NoName.Enums;
 using UnityEngine;
 
 namespace alicewithalex.Data

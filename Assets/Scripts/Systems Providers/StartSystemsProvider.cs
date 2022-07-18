@@ -1,33 +1,28 @@
-using NoName.Injection;
-using NoName.StateMachine;
+using NoName.Providers;
 using NoName.Systems;
+using alicewithalex.Data;
 using NoName.UI;
+using NoName.Injection;
 
 namespace alicewithalex.Providers
 {
-    public class StartSystemsProvider : StateSystemsProvider
+    public class StartSystemsProvider : StateSystemsProvider<StartStateData>
     {
-        internal class Dependencies
+        internal class Depenendecies
         {
             [Inject] public UIHub UIHub;
         }
 
-        public override State State => State.Start;
-
-        public override StateSystems GetStateSystems(IContainer container)
+        protected override void Process(StateSystems systems, IContainer container)
         {
-            var dependencies = new Dependencies();
+            var dependencies = new Depenendecies();
             container.Inject(dependencies);
-
-            var systems = new StateSystems();
 
             systems
 
                 .Add(new Systems.StartMenuSystem(dependencies.UIHub))
 
                 ;
-
-            return systems;
         }
     }
 }

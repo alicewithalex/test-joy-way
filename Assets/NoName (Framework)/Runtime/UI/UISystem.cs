@@ -1,5 +1,5 @@
 using NoName.Injection;
-using NoName.StateMachine;
+using NoName.Enums;
 using NoName.UI;
 
 namespace NoName.Systems

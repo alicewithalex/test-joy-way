@@ -1,3 +1,5 @@
+using NoName.Factory;
+using NoName.Injection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +8,10 @@ namespace NoName.Data
 {
     public abstract class StateData
     {
+        [Inject] private IFactory _factory;
+
+        public IFactory Factory => _factory;
+
         private readonly Dictionary<Type, HashSet<object>> _trash;
 
         protected StateData()

@@ -6,11 +6,11 @@ namespace alicewithalex.Systems
 {
     public class InventorySystem : IInitializeSystem
     {
-        [Inject] private readonly GameStateData _stateData;
+        [Inject] private readonly GameStateData _data;
 
         public void OnInitialize()
         {
-            _stateData.Inventory = new Inventory(_stateData.Hands);
+            _data.Inventory = new Inventory(_data.Hands);
         }
     }
 }

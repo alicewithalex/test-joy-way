@@ -1,4 +1,5 @@
 using NoName.Injection;
+using NoName.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -6,14 +7,18 @@ namespace NoName.Systems
 {
     public class StateSystems
     {
+        public readonly State State;
+
         private readonly List<ISystem> _systems;
 
         private readonly List<IStateUpdateSystem> _stateUpdateSystems;
         private readonly List<IStateEnterSystem> _stateEnterSystems;
         private readonly List<IStateExitSystem> _stateExitSystems;
 
-        public StateSystems()
+        public StateSystems(State state)
         {
+            State = state;
+
             _systems = new List<ISystem>();
 
             _stateUpdateSystems = new List<IStateUpdateSystem>();
@@ -73,6 +78,8 @@ namespace NoName.Systems
 
         public void StateUpdate()
         {
+            //UnityEngine.Debug.Log($"Update:{State}");
+
             foreach (var system in _stateUpdateSystems)
             {
                 system.StateUpdate();
