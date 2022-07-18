@@ -14,9 +14,25 @@ namespace alicewithalex.Data
         private Pickup _pickup;
         private Item _current;
 
+        private bool _justPicked;
+
         public HandType HandType => _handType;
 
         public bool IsHolding => _pickup != null;
+
+        public bool JustPicked
+        {
+            get
+            {
+                if (_justPicked)
+                {
+                    _justPicked = false;
+                    return true;
+                }
+
+                return false;
+            }
+        }
 
         protected override void OnInitialize()
         {
@@ -44,6 +60,7 @@ namespace alicewithalex.Data
 
         public void Grab(Pickup pickup)
         {
+            _justPicked = true;
             _pickup = pickup;
             _pickup.Toggle(false);
 

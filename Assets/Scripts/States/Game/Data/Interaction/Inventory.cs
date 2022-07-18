@@ -26,7 +26,7 @@ namespace alicewithalex.Data
 
         public Pickup Remove(HandType handType)
         {
-            if (!_hands.TryGetValue(handType, out var hand)) return null;
+            if (!_hands.TryGetValue(handType, out var hand) || hand.JustPicked) return null;
 
             return hand.Release();
         }

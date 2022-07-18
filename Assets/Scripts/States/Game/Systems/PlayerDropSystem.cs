@@ -13,8 +13,8 @@ namespace alicewithalex.Systems
         {
             if (_data.Inventory is null) return;
 
-            if (_data.Input.LeftHandReleased) Throw(_data.Inventory.Remove(HandType.Left));
-            if (_data.Input.RightHandReleased) Throw(_data.Inventory.Remove(HandType.Right));
+            if (_data.Input.LeftHandPressed) Throw(_data.Inventory.Remove(HandType.Left));
+            if (_data.Input.RightHandPressed) Throw(_data.Inventory.Remove(HandType.Right));
         }
 
         private void Throw(Pickup pickup)

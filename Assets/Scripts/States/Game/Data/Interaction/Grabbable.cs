@@ -17,6 +17,7 @@ namespace alicewithalex.Data
         {
             if (!Interactable) return;
 
+            ClearVelocity();
             _grabbed = true;
         }
 
@@ -33,14 +34,18 @@ namespace alicewithalex.Data
 
         public override void OnReset()
         {
+            ClearVelocity();
+            _grabbed = false;
+
+            base.OnReset();
+        }
+
+        private void ClearVelocity()
+        {
             if (_rigidbody)
             {
                 _rigidbody.velocity = _rigidbody.angularVelocity = Vector3.zero;
             }
-
-            _grabbed = false;
-
-            base.OnReset();
         }
     }
 }
