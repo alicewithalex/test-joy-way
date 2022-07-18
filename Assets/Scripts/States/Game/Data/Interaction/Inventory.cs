@@ -31,11 +31,22 @@ namespace alicewithalex.Data
             return hand.Release();
         }
 
-        public void UseItem(HandType handType,KeyCode key)
+        public void UseItem(HandType handType, KeyCode key)
         {
             if (!IsHolding(handType)) return;
 
             _hands[handType].Use(key);
+        }
+
+        public void Clear()
+        {
+            foreach (var hand in _hands.Values)
+            {
+                var pickup = hand.Release();
+
+                if (pickup != null)
+                    pickup.OnReset();
+            }
         }
     }
 }

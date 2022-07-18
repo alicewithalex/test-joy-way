@@ -4,12 +4,15 @@ using UnityEngine;
 
 namespace alicewithalex.Data
 {
-    public class Player : StateDataReciever<GameStateData>
+    public class Player : StateDataReciever<GameStateData>, IResetable
     {
         [SerializeField] private CharacterController _characterController;
         [SerializeField] private MotionConfig _movementConfig;
 
         private Transform _transform;
+
+        private Vector3 _initialPosition;
+        private Quaternion _initialRotation;
 
         private float _currentSpeed;
         private float _currentAngle;
@@ -23,6 +26,9 @@ namespace alicewithalex.Data
             Data.Player = this;
 
             _transform = transform;
+
+            _initialPosition = _transform.position;
+            _initialRotation = _transform.rotation;
         }
 
         public void Move()
@@ -76,6 +82,19 @@ namespace alicewithalex.Data
             {
                 _verticalVelocity = 0f;
             }
+        }
+
+        public void OnReset()
+        {
+            _characterController.enabled = false;
+
+            _transform.position = _initialPosition;
+            _transform.rotation = _initialRotation;
+
+            if (Data.Inventory != null)
+                Data.Inventory.Clear();
+
+            _characterController.enabled = true;
         }
     }
 }

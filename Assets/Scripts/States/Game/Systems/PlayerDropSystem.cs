@@ -1,7 +1,7 @@
 using alicewithalex.Data;
-using DG.Tweening;
 using NoName.Injection;
 using NoName.Systems;
+using UnityEngine;
 
 namespace alicewithalex.Systems
 {
@@ -21,13 +21,10 @@ namespace alicewithalex.Systems
         {
             if (pickup == null) return;
 
+            pickup.transform.forward = Vector3.ProjectOnPlane(_data.Player.transform.forward, Vector3.up);
+            pickup.transform.position = _data.Player.transform.position + pickup.transform.forward;
+
             pickup.Release();
-
-            pickup.transform.DOKill();
-
-            pickup.transform.position = _data.Player.transform.position + _data.Player.transform.forward;
-            pickup.transform.DOMove(_data.Player.transform.position + _data.Player.transform.forward * 2f, 1f)
-                .SetEase(Ease.OutQuad);
         }
 
     }

@@ -83,12 +83,25 @@ PrefabInstance:
       propertyPath: _itemType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6246490125111164871, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: _rigidbody
+      value: 
+      objectReference: {fileID: 2789898345974378990}
+    - target: {fileID: 8757203249224700889, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9141781161611646292, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+--- !u!54 &2789898345974378990 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 8757203249224700889, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}
+  m_PrefabInstance: {fileID: 6859088019688776247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6934637364089001971 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4543190595035919812, guid: d35ea918f22171f46b18bfad02ce0f41, type: 3}

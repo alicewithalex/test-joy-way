@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Projectile
+  - Reset
   layers:
   - Default
   - TransparentFX
@@ -35,7 +36,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Player
   - Hitbox
   - Pickup
   m_SortingLayers:
